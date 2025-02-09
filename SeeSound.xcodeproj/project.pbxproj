@@ -14,6 +14,7 @@
 		FC04CB6F2D52C99E000C86FA /* SeeSoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB6E2D52C99E000C86FA /* SeeSoundTests.swift */; };
 		FC04CB792D52C99E000C86FA /* SeeSoundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB782D52C99E000C86FA /* SeeSoundUITests.swift */; };
 		FC04CB7B2D52C99E000C86FA /* SeeSoundUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB7A2D52C99E000C86FA /* SeeSoundUITestsLaunchTests.swift */; };
+		FC04CB882D52CCB8000C86FA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB872D52CCB8000C86FA /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		FC04CB742D52C99E000C86FA /* SeeSoundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeeSoundUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC04CB782D52C99E000C86FA /* SeeSoundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeSoundUITests.swift; sourceTree = "<group>"; };
 		FC04CB7A2D52C99E000C86FA /* SeeSoundUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeSoundUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FC04CB872D52CCB8000C86FA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		FC04CB892D577F4C000C86FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,7 @@
 		FC04CB512D52C99D000C86FA = {
 			isa = PBXGroup;
 			children = (
+				FC04CB892D577F4C000C86FA /* Info.plist */,
 				FC04CB5C2D52C99D000C86FA /* SeeSound */,
 				FC04CB6D2D52C99E000C86FA /* SeeSoundTests */,
 				FC04CB772D52C99E000C86FA /* SeeSoundUITests */,
@@ -96,6 +100,7 @@
 			children = (
 				FC04CB5D2D52C99D000C86FA /* SeeSoundApp.swift */,
 				FC04CB5F2D52C99D000C86FA /* ContentView.swift */,
+				FC04CB872D52CCB8000C86FA /* WebView.swift */,
 				FC04CB612D52C99E000C86FA /* Assets.xcassets */,
 				FC04CB632D52C99E000C86FA /* Preview Content */,
 			);
@@ -215,6 +220,8 @@
 				Base,
 			);
 			mainGroup = FC04CB512D52C99D000C86FA;
+			packageReferences = (
+			);
 			productRefGroup = FC04CB5B2D52C99D000C86FA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC04CB882D52CCB8000C86FA /* WebView.swift in Sources */,
 				FC04CB602D52C99D000C86FA /* ContentView.swift in Sources */,
 				FC04CB5E2D52C99D000C86FA /* SeeSoundApp.swift in Sources */,
 			);
@@ -422,6 +430,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeeSound/Preview Content\"";
+				DEVELOPMENT_TEAM = 76H8A6BC99;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -434,7 +443,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SeeSound;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramovi.SeeSound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -450,6 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeeSound/Preview Content\"";
+				DEVELOPMENT_TEAM = 76H8A6BC99;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -462,7 +472,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SeeSound;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramovi.SeeSound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

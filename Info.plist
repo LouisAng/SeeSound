@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   Info.plist
-   SeeSound
-
-   Created by Louis An on 2/8/25.
-   Copyright (c) 2025 ___ORGANIZATIONNAME___. All rights reserved.
--->
 <plist version="1.0">
-<dict/>
+<dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>http</string>
+        <string>https</string>
+    </array>
+</dict>
 </plist>
