@@ -6,19 +6,34 @@ struct WebView: UIViewRepresentable {
     @Binding var isScrolling: Bool
     @Binding var currentURL: URL
     let scrollSpeed: Double
+    @Binding var canGoBack: Bool
+    @Binding var canGoForward: Bool
     
     func makeUIView(context: Context) -> WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = []
         
+        // 모바일 뷰 설정 추가
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.scrollView.delegate = context.coordinator
         webView.navigationDelegate = context.coordinator
         
+        // 모바일 User-Agent 설정
+        let mobileUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1"
+        webView.customUserAgent = mobileUserAgent
+        
         // 메모리 관리 개선
         webView.configuration.processPool = WKProcessPool()
         webView.configuration.websiteDataStore = WKWebsiteDataStore.default()
+        
+        // 노티피케이션 옵저버 추가
+        NotificationCenter.default.addObserver(forName: .init("goBack"), object: nil, queue: .main) { _ in
+            webView.goBack()
+        }
+        NotificationCenter.default.addObserver(forName: .init("goForward"), object: nil, queue: .main) { _ in
+            webView.goForward()
+        }
         
         return webView
     }
@@ -131,6 +146,14 @@ struct WebView: UIViewRepresentable {
             if parent.isScrolling, let webView = webView {
                 // 마지막으로 설정된 속도로 다시 시작
                 startAutoScroll(webView: webView, speed: lastSetSpeed)
+            }
+        }
+        
+        // 웹뷰 상태 변경 시 호출
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            DispatchQueue.main.async { [weak self] in
+                self?.parent.canGoBack = webView.canGoBack
+                self?.parent.canGoForward = webView.canGoForward
             }
         }
     }

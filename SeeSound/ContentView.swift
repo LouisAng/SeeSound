@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var isScrolling: Bool = false
     @State private var scrollSpeed: Double = 50.0
     @State private var isControlVisible: Bool = true  // 컨트롤 영역 표시 여부
+    @State private var canGoBack: Bool = false    // 뒤로 가기 가능 여부
+    @State private var canGoForward: Bool = false // 앞으로 가기 가능 여부
     
     init() {
         _urlString = State(initialValue: defaultURL)
@@ -27,6 +29,25 @@ struct ContentView: View {
                 VStack {
                     // URL 입력 영역
                     HStack {
+                        // 뒤로 가기 버튼
+                        Button(action: {
+                            // WebView에서 구현할 메서드
+                            NotificationCenter.default.post(name: .init("goBack"), object: nil)
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(canGoBack ? .blue : .gray)
+                        }
+                        .disabled(!canGoBack)
+                        
+                        // 앞으로 가기 버튼
+                        Button(action: {
+                            NotificationCenter.default.post(name: .init("goForward"), object: nil)
+                        }) {
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(canGoForward ? .blue : .gray)
+                        }
+                        .disabled(!canGoForward)
+                        
                         if #available(iOS 17.0, *) {
                             TextField("URL을 입력하세요", text: $urlString)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -82,7 +103,9 @@ struct ContentView: View {
                 WebView(url: currentURL, 
                        isScrolling: $isScrolling,
                        currentURL: $currentURL,
-                       scrollSpeed: scrollSpeed)
+                       scrollSpeed: scrollSpeed,
+                       canGoBack: $canGoBack,
+                       canGoForward: $canGoForward)
                 
                 // 모든 컨트롤 버튼들을 하나의 HStack으로 묶기
                 HStack(spacing: 12) {
