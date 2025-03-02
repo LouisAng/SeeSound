@@ -15,6 +15,8 @@
 		FC04CB792D52C99E000C86FA /* SeeSoundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB782D52C99E000C86FA /* SeeSoundUITests.swift */; };
 		FC04CB7B2D52C99E000C86FA /* SeeSoundUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB7A2D52C99E000C86FA /* SeeSoundUITestsLaunchTests.swift */; };
 		FC04CB882D52CCB8000C86FA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04CB872D52CCB8000C86FA /* WebView.swift */; };
+		FC1510282D74972C008F7D38 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1510272D74972C008F7D38 /* Bookmark.swift */; };
+		FC15102A2D749866008F7D38 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1510292D749866008F7D38 /* Tab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		FC04CB7A2D52C99E000C86FA /* SeeSoundUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeSoundUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FC04CB872D52CCB8000C86FA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		FC04CB892D577F4C000C86FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC1510272D74972C008F7D38 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		FC1510292D749866008F7D38 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				FC04CB872D52CCB8000C86FA /* WebView.swift */,
 				FC04CB612D52C99E000C86FA /* Assets.xcassets */,
 				FC04CB632D52C99E000C86FA /* Preview Content */,
+				FC1510272D74972C008F7D38 /* Bookmark.swift */,
+				FC1510292D749866008F7D38 /* Tab.swift */,
 			);
 			path = SeeSound;
 			sourceTree = "<group>";
@@ -266,7 +272,9 @@
 			files = (
 				FC04CB882D52CCB8000C86FA /* WebView.swift in Sources */,
 				FC04CB602D52C99D000C86FA /* ContentView.swift in Sources */,
+				FC15102A2D749866008F7D38 /* Tab.swift in Sources */,
 				FC04CB5E2D52C99D000C86FA /* SeeSoundApp.swift in Sources */,
+				FC1510282D74972C008F7D38 /* Bookmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,10 +16,19 @@ struct ContentView: View {
     @State private var isControlVisible: Bool = true  // 컨트롤 영역 표시 여부
     @State private var canGoBack: Bool = false    // 뒤로 가기 가능 여부
     @State private var canGoForward: Bool = false // 앞으로 가기 가능 여부
+    @State private var showingBookmarks: Bool = false
+    @State private var bookmarks: [Bookmark] = []
+    @State private var showingAddBookmark: Bool = false
+    @State private var bookmarkTitle: String = ""
     
     init() {
         _urlString = State(initialValue: defaultURL)
         _currentURL = State(initialValue: URL(string: defaultURL)!)
+        
+        if let savedBookmarks = UserDefaults.standard.data(forKey: "bookmarks"),
+           let decodedBookmarks = try? JSONDecoder().decode([Bookmark].self, from: savedBookmarks) {
+            _bookmarks = State(initialValue: decodedBookmarks)
+        }
     }
     
     var body: some View {
@@ -47,6 +56,23 @@ struct ContentView: View {
                                 .foregroundColor(canGoForward ? .blue : .gray)
                         }
                         .disabled(!canGoForward)
+                        
+                        // 즐겨찾기 버튼 추가
+                        Button(action: {
+                            showingBookmarks.toggle()
+                        }) {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                        }
+                        
+                        // 즐겨찾기 추가 버튼
+                        Button(action: {
+                            bookmarkTitle = urlString
+                            showingAddBookmark = true
+                        }) {
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.blue)
+                        }
                         
                         if #available(iOS 17.0, *) {
                             TextField("URL을 입력하세요", text: $urlString)
@@ -159,6 +185,18 @@ struct ContentView: View {
             }
         }
         .edgesIgnoringSafeArea(.bottom)
+        .sheet(isPresented: $showingBookmarks) {
+            BookmarkListView(bookmarks: $bookmarks, currentURL: $currentURL, showingBookmarks: $showingBookmarks)
+        }
+        .alert("즐겨찾기 추가", isPresented: $showingAddBookmark) {
+            TextField("제목", text: $bookmarkTitle)
+            Button("추가") {
+                addBookmark(title: bookmarkTitle, url: urlString)
+            }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text("즐겨찾기의 제목을 입력하세요")
+        }
     }
     
     private func loadURL() {
@@ -178,8 +216,62 @@ struct ContentView: View {
             }
         }
     }
+    
+    private func addBookmark(title: String, url: String) {
+        let bookmark = Bookmark(title: title, url: url)
+        bookmarks.append(bookmark)
+        saveBookmarks()
+    }
+    
+    private func saveBookmarks() {
+        if let encoded = try? JSONEncoder().encode(bookmarks) {
+            UserDefaults.standard.set(encoded, forKey: "bookmarks")
+        }
+    }
 }
 
 #Preview {
     ContentView()
+}
+
+// 즐겨찾기 목록 뷰 추가
+struct BookmarkListView: View {
+    @Binding var bookmarks: [Bookmark]
+    @Binding var currentURL: URL
+    @Binding var showingBookmarks: Bool
+    
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(bookmarks) { bookmark in
+                    Button(action: {
+                        if let url = URL(string: bookmark.url) {
+                            currentURL = url
+                            showingBookmarks = false
+                        }
+                    }) {
+                        VStack(alignment: .leading) {
+                            Text(bookmark.title)
+                                .font(.headline)
+                            Text(bookmark.url)
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                .onDelete(perform: deleteBookmarks)
+            }
+            .navigationTitle("즐겨찾기")
+            .navigationBarItems(trailing: Button("닫기") {
+                showingBookmarks = false
+            })
+        }
+    }
+    
+    private func deleteBookmarks(at offsets: IndexSet) {
+        bookmarks.remove(atOffsets: offsets)
+        if let encoded = try? JSONEncoder().encode(bookmarks) {
+            UserDefaults.standard.set(encoded, forKey: "bookmarks")
+        }
+    }
 }

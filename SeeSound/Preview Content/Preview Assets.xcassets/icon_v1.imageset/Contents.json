@@ -1,10 +1,13 @@
 {
   "images" : [
     {
-      "filename" : "final_v.1.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "icon_v1.png",
       "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
+      "scale" : "1x",
+      "unassigned" : true
     }
   ],
   "info" : {
